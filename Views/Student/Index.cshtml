@@ -1,0 +1,60 @@
+﻿@model List<Student>
+
+@{
+}
+
+<h2 class="text-center mb-5">Student List</h2>
+
+<div class="row">
+    <div class="col">
+        <a class="btn btn-outline-primary" asp-controller="Student" asp-action="Create">Add New</a>
+    </div>
+    <div class="col">
+        <!-- You can add additional controls or filters here if needed -->
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Actions</th>
+            <th>ID</th>
+            <th>Profile</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Class</th>
+            <th>Fees</th>
+            <th>Address</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-info" asp-controller="Student" asp-action="Edit" asp-route-id="@student.SId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Student" asp-action="Delete" asp-route-id="@student.SId">Delete</a>
+                </td>
+                <td>@student.SId</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(student.SProfile))
+                    {
+                        <img src="@student.SProfile" width="50" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+                <td>@student.SName</td>
+                <td>@student.SContact</td>
+                <td>@student.SClass</td>
+                <td>@student.SFees</td>
+                <td>@student.SAddress</td>
+                <td>@student.CreatedDate.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
